@@ -1,47 +1,51 @@
 package dev.henriquebraga.androidstudy
 
-import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
-import android.util.Log
 import androidx.appcompat.app.AlertDialog
+import androidx.core.view.WindowCompat
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.navigateUp
+import androidx.navigation.ui.setupActionBarWithNavController
 import dev.henriquebraga.androidstudy.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    // variable to control the binding
+    // variable to handle the binding
     private lateinit var binding: ActivityMainBinding
+
+    // variable to handle the toolbar
+    private lateinit var appBarConfiguration: AppBarConfiguration
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setupActionListeners()
+
+        // Set the support Action Bar
+        setSupportActionBar(binding.toolbar)
+
+        // Set up Navigation
+        setupNavigation()
+
     }
 
-    private fun setupActionListeners() {
-        binding.button1.setOnClickListener {
 
-            val name = binding.textEdit1.text.toString()
-
-            if(TextUtils.isEmpty(name)) {
-                showAlert("Insert an name!")
-            }
-            else {
-                binding.textLabel1.text = "$name, You've pressed the button!!"
-            }
-
-        }
+    // Function to setup the navigation
+    private fun setupNavigation() {
+        val navController = findNavController(R.id.nav_host_fragment_content_main)
+        appBarConfiguration = AppBarConfiguration(navController.graph)
+        setupActionBarWithNavController(navController, appBarConfiguration)
     }
 
-    private fun showAlert(message: String) {
-        val builder = AlertDialog.Builder(this)
-        .setTitle("Alert")
-        .setMessage(message)
-            .setPositiveButton("ok") {_, _ ->
-            }
-        builder.show()
+    // Function to handle the navigation
+    override fun onSupportNavigateUp(): Boolean {
+        val navController = findNavController(R.id.nav_host_fragment_content_main)
+        return navController.navigateUp(appBarConfiguration)
+            || super.onSupportNavigateUp()
     }
 
 }
