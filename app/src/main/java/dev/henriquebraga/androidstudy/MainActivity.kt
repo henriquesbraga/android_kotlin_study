@@ -1,7 +1,11 @@
 package dev.henriquebraga.androidstudy
 
+import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextUtils
+import android.util.Log
+import androidx.appcompat.app.AlertDialog
 import dev.henriquebraga.androidstudy.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -18,11 +22,26 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupActionListeners() {
         binding.button1.setOnClickListener {
-            binding.textLabel1.text = "You've pressed the button!!"
+
+            val name = binding.textEdit1.text.toString()
+
+            if(TextUtils.isEmpty(name)) {
+                showAlert("Insert an name!")
+            }
+            else {
+                binding.textLabel1.text = "$name, You've pressed the button!!"
+            }
+
         }
     }
 
-
-
+    private fun showAlert(message: String) {
+        val builder = AlertDialog.Builder(this)
+        .setTitle("Alert")
+        .setMessage(message)
+            .setPositiveButton("ok") {_, _ ->
+            }
+        builder.show()
+    }
 
 }
