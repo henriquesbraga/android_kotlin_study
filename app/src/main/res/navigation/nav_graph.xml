@@ -28,10 +28,6 @@
             android:id="@+id/action_second_to_first"
             app:destination="@+id/FirstFragment"
             />
-
-        <argument
-            android:name="personArg"
-            app:argType="dev.henriquebraga.androidstudy.model.Person" />
     </fragment>
 
 </navigation>

@@ -6,14 +6,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import dev.henriquebraga.androidstudy.R
 import dev.henriquebraga.androidstudy.databinding.FragmentSecondBinding
 import dev.henriquebraga.androidstudy.model.Person
+import dev.henriquebraga.androidstudy.utils.SpaceItemDecorator
+import dev.henriquebraga.androidstudy.utils.personDataList
 
 class SecondFragment : Fragment() {
 
     private var _binding: FragmentSecondBinding? = null
     private val binding get() = _binding!!
+
+    private lateinit var adapter: PersonListAdapter
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        adapter = PersonListAdapter(personDataList.shuffled())
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -24,16 +34,18 @@ class SecondFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        printValue()
+
+        // Setup Adapter
+        //Setup adapter
+        binding.recyclerView2.layoutManager = LinearLayoutManager(requireContext())
+        binding.recyclerView2.adapter = adapter
+        binding.recyclerView2.addItemDecoration(SpaceItemDecorator(18))
+
+        // Setup Listeners
         binding.fab.setOnClickListener {
             findNavController().navigateUp()
         }
     }
 
-    private fun printValue() {
-        // Receiving data
-        val p = arguments?.get("personArg") as Person
-        binding.textView1.text = p.name
-    }
 
 }
