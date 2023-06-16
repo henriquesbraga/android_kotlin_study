@@ -31,6 +31,7 @@ class SecondFragment : Fragment() {
     }
 
     private fun printValue() {
+        // Receiving data
         val p = arguments?.get("personArg") as Person
         binding.textView1.text = p.name
     }

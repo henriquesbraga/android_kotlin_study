@@ -26,6 +26,7 @@ class FirstFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Bundle to transport
         val p = Person("Henrique")
         val bundle = bundleOf("personArg" to p)
 
