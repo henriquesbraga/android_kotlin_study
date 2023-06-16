@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import dev.henriquebraga.androidstudy.R
 import dev.henriquebraga.androidstudy.databinding.FragmentSecondBinding
+import dev.henriquebraga.androidstudy.model.Person
 
 class SecondFragment : Fragment() {
 
@@ -23,9 +24,15 @@ class SecondFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        printValue()
         binding.fab.setOnClickListener {
             findNavController().navigateUp()
         }
+    }
+
+    private fun printValue() {
+        val p = arguments?.get("personArg") as Person
+        binding.textView1.text = p.name
     }
 
 }
