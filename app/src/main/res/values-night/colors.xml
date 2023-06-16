@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="rv_bg_color">#1a1a1a</color>
+    <color name="rv_it_bg_color">#333333</color>
+    <color name="rv_it_tx_color">#FFFFFF</color>
+    <color name="rv_fb_color">#121212</color>
+</resources>
