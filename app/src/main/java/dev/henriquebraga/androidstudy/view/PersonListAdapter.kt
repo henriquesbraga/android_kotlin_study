@@ -1,5 +1,6 @@
 package dev.henriquebraga.androidstudy.view
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
@@ -8,9 +9,11 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Recycler
 import dev.henriquebraga.androidstudy.databinding.ItemListBinding
 import dev.henriquebraga.androidstudy.model.Person
+import dev.henriquebraga.androidstudy.utils.OnItemClickListener
 
 class PersonListAdapter (
-    private val list: List<Person>
+    list: List<Person>,
+    private val listener: OnItemClickListener
 ): RecyclerView.Adapter<PersonListAdapter.ViewHolder>() {
 
     // AsyncListDiffer
@@ -37,11 +40,15 @@ class PersonListAdapter (
         asyncListDiffer.submitList(persons)
     }
 
-    class ViewHolder(
+    inner class ViewHolder(
         private val binding: ItemListBinding
     ) :RecyclerView.ViewHolder(binding.root) {
+
         fun bind(person: Person) {
             binding.textView2.text = person.name
+            binding.root.setOnClickListener {
+                listener.onItemClick(person)
+            }
         }
     }
 

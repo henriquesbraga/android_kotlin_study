@@ -13,7 +13,7 @@ val personDataList = listOf(
     Person("Hamilton"),
     Person("Roberto"),
     Person("Pedro"),
-    Person("Pedro"),
+    Person("Tiago"),
     Person("Marcos"),
     Person("Antônio"),
     Person("Lucas"),

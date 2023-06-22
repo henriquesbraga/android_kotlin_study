@@ -7,13 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import dev.henriquebraga.androidstudy.R
 import dev.henriquebraga.androidstudy.databinding.FragmentSecondBinding
 import dev.henriquebraga.androidstudy.model.Person
+import dev.henriquebraga.androidstudy.utils.OnItemClickListener
 import dev.henriquebraga.androidstudy.utils.SpaceItemDecorator
 import dev.henriquebraga.androidstudy.utils.personDataList
 
-class SecondFragment : Fragment() {
+class SecondFragment : Fragment(), OnItemClickListener {
 
     private var _binding: FragmentSecondBinding? = null
     private val binding get() = _binding!!
@@ -22,7 +24,7 @@ class SecondFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        adapter = PersonListAdapter(personDataList.shuffled())
+        adapter = PersonListAdapter(personDataList.shuffled(), this)
     }
 
     override fun onCreateView(
@@ -45,6 +47,11 @@ class SecondFragment : Fragment() {
         binding.fab.setOnClickListener {
             findNavController().navigateUp()
         }
+    }
+
+    override fun onItemClick(person: Person) {
+        val snackbar = Snackbar.make(binding.root, "Name: ${person.name}", Snackbar.LENGTH_SHORT)
+        snackbar.show()
     }
 
 
